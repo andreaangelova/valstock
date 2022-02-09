@@ -22,6 +22,29 @@ p {
   margin: 0;
 }
 
+button {
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.btn-primary {
+  background-color: @color-accent;
+  color: @color-white;
+  border: 2px solid @color-white;
+  &:hover {
+    background-color: @color-white;
+    color: @color-accent;
+    border: 2px solid @color-accent;
+  }
+}
+
 .content {
   display: flex;
   margin: 82px auto 32px;
@@ -29,13 +52,4 @@ p {
   max-width: 960px;
   flex-direction: column;
   align-items: center;
-}
-
-/* Responsive Styles */
-@media screen and (max-width: 767px) {
-
-}
-
-@media screen and (max-width: 575px) {
-
 }
