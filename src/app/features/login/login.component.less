@@ -1,0 +1,30 @@
+@import url(/src/assets/styles/theming.less);
+@import url(/src/assets/styles/screens.less);
+
+:host {
+  text-align: center;
+}
+
+#img-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: block;
+  img {
+    width: 400px;
+    @media @phone {
+      width: 300px;
+    }
+  }
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: @color-accent;
+  height: 150px;
+  width: 100%;
+}
