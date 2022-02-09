@@ -1,5 +1,24 @@
 <h1>Join our stock community!</h1>
 <p>Download free photos and videos powered by the best photographers.</p>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <label for="name">username</label>
+  <input
+    id="name"
+    formControlName="name"
+    type="text"
+    placeholder="Enter username here..."
+  />
+  <label for="password">password</label>
+  <input
+    id="password"
+    formControlName="password"
+    type="password"
+    placeholder="Enter username here..."
+  />
+  <button type="submit">log in</button>
+</form>
+
 <div id="footer"></div>
 <div id="img-wrapper">
   <img src="/assets/images/camera.svg" alt="camera image" />
