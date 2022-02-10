@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,22 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required],
   });
 
-  constructor(private formBuilder: FormBuilder, private route: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: Router,
+    private loginService: LoginService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // TODO: add guard
+    if (this.loginService.isLoggedIn()) {
+      this.route.navigate(['dashboard']);
+    }
+  }
 
   login(): void {
     if (this.loginForm.valid) {
-      localStorage.setItem('user', JSON.stringify(this.loginForm.value));
+      this.loginService.logIn(this.loginForm.value);
       this.loginForm.reset();
       this.route.navigate(['dashboard']);
     }
