@@ -1,4 +1,5 @@
 @import url(/src/assets/styles/theming.less);
+@import url(/src/assets/styles/screens.less);
 
 .nav {
   z-index: 1;
@@ -18,4 +19,18 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.text-right {
+  position: absolute;
+  right: 20%;
+  @media @phone {
+    right: 2%;
+  }
+}
+
+button {
+  @media @phone {
+    width: 100px;
+  }
 }
