@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, forkJoin } from 'rxjs';
+import { Item } from '../models/item';
 
 @Injectable({
   providedIn: 'root',
@@ -8,22 +9,26 @@ import { BehaviorSubject, forkJoin } from 'rxjs';
 export class ItemsService {
   baseUrl: string = 'https://picsum.photos/200';
   numberOfItems: number = 12;
-  public items = new BehaviorSubject<string[]>([]);
+  public items = new BehaviorSubject<Item[]>([]);
 
   constructor(private http: HttpClient) {}
 
   async getItems() {
     let imgApiCalls = [];
-    let itemsTemp: string[] = [];
+    let itemsTemp: Item[] = [];
     for (let i = 1; i <= this.numberOfItems; i++) {
       let url = this.baseUrl + this.getUrlSuffix(i);
-      imgApiCalls.push(this.http.get(url, { responseType: 'blob' }));
+      imgApiCalls.push(
+        this.http.get(url, { observe: 'response', responseType: 'blob' })
+      );
     }
 
     forkJoin(imgApiCalls).subscribe(async (results) => {
-      for (const blob of results) {
-        let itemUrl = await this.convertBlobToUrl(blob);
-        itemsTemp.push(itemUrl);
+      for (const data of results) {
+        let blob = data.body as Blob;
+        let url = await this.convertBlobToUrl(blob);
+        let id = data.headers.get('picsum-id') as string;
+        itemsTemp.push({ id, url });
       }
       this.items.next(itemsTemp);
     });

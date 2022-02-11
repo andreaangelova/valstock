@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Item } from 'src/app/core/models/item';
 import { ItemsService } from 'src/app/core/services/items.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ItemsService } from 'src/app/core/services/items.service';
   styleUrls: ['./dashboard.component.less'],
 })
 export class DashboardComponent implements OnInit {
-  items: string[] = [];
+  items: Item[] = [];
   subscription: Subscription;
 
   constructor(private itemsService: ItemsService) {
