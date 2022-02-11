@@ -7,18 +7,30 @@ import { Item } from '../models/item';
   providedIn: 'root',
 })
 export class ItemsService {
-  baseUrl: string = 'https://picsum.photos/200';
+  baseUrl: string = 'https://picsum.photos';
   numberOfItems: number = 12;
   public items = new BehaviorSubject<Item[]>([]);
   public selectedItem = new BehaviorSubject<Item | null>(null);
 
   constructor(private http: HttpClient) {}
 
+  setSelectedItem(item: Item) {
+    this.selectedItem.next(item);
+    if (!item.author) {
+      this.http
+        .get(`${this.baseUrl}/id/${item.id}/info`)
+        .subscribe((data: any) => {
+          item.author = data.author;
+          this.selectedItem.next(item);
+        });
+    }
+  }
+
   async getItems() {
     let imgApiCalls = [];
     let itemsTemp: Item[] = [];
     for (let i = 1; i <= this.numberOfItems; i++) {
-      let url = this.baseUrl + this.getUrlSuffix(i);
+      let url = this.baseUrl + '/200' + this.getUrlSuffix(i);
       imgApiCalls.push(
         this.http.get(url, { observe: 'response', responseType: 'blob' })
       );
@@ -33,10 +45,6 @@ export class ItemsService {
       }
       this.items.next(itemsTemp);
     });
-  }
-
-  setSelectedItem(item: Item) {
-    this.selectedItem.next(item);
   }
 
   getUrlSuffix(index: number) {
