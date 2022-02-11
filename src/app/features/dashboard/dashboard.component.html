@@ -1,1 +1,5 @@
-<p>dashboard works!</p>
+<div id="grid">
+  <div *ngFor="let item of items; let i = index">
+    <img src="{{ item }}" alt="item {{ i }}" />
+  </div>
+</div>
