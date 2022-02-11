@@ -25,7 +25,8 @@ p {
 button {
   font-weight: bold;
   text-transform: uppercase;
-  padding: 5px 50px;
+  padding: 5px 5px;
+  width: 150px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -45,6 +46,17 @@ button {
   }
 }
 
+.btn-secondary {
+  background-color: @color-white;
+  color: @color-accent;
+  border: 2px solid @color-accent;
+  &:hover {
+    background-color: @color-accent;
+    color: @color-white;
+    border: 2px solid @color-white;
+  }
+}
+
 .content {
   display: flex;
   margin: 82px auto 32px;
@@ -52,4 +64,12 @@ button {
   max-width: 960px;
   flex-direction: column;
   align-items: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.text-secondary {
+  color: @color-gray;
 }

@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {}
 
   goToItem(item: Item): void {
+    this.itemsService.setSelectedItem(item);
     this.router.navigate(['dashboard/item', item.id]);
   }
 

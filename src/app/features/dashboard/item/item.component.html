@@ -1,1 +1,19 @@
-<p>item works!</p>
+<div *ngIf="selectedItem">
+  <div id="btn-wrapper">
+    <button class="btn-secondary">add to album +</button>
+    <button class="btn-primary">download</button>
+  </div>
+
+  <div id="img-wrapper">
+    <img src="{{ selectedItem.url }}" />
+  </div>
+
+  <div id="text-wrapper">
+    <p class="bold">uploaded by</p>
+    <h1>Name</h1>
+    <p class="text-secondary">29th November 2021</p>
+    <button id="btn-back" class="btn-secondary" routerLink="/dashboard">
+      go back
+    </button>
+  </div>
+</div>

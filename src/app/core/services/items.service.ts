@@ -10,6 +10,7 @@ export class ItemsService {
   baseUrl: string = 'https://picsum.photos/200';
   numberOfItems: number = 12;
   public items = new BehaviorSubject<Item[]>([]);
+  public selectedItem = new BehaviorSubject<Item | null>(null);
 
   constructor(private http: HttpClient) {}
 
@@ -32,6 +33,10 @@ export class ItemsService {
       }
       this.items.next(itemsTemp);
     });
+  }
+
+  setSelectedItem(item: Item) {
+    this.selectedItem.next(item);
   }
 
   getUrlSuffix(index: number) {
