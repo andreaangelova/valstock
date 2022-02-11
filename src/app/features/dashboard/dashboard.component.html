@@ -1,6 +1,11 @@
 <div id="grid">
-  <div class="img-wrapper" *ngFor="let item of items; let i = index">
+  <div
+    class="img-wrapper"
+    *ngFor="let item of items; let i = index"
+    (click)="goToItem(item)"
+  >
     <img src="{{ item.url }}" alt="item {{ item.id }}" />
+
     <div class="img-text">
       <p>Add to album</p>
     </div>
