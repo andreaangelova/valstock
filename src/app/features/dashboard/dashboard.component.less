@@ -1,9 +1,43 @@
+@import url(/src/assets/styles/theming.less);
+
 #grid {
   column-count: 3;
   column-gap: 30px;
   column-width: 30%;
-  img {
+
+  .img-wrapper {
     margin-bottom: 15px;
-    width: 100%;
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+      .img-text {
+        visibility: visible;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .img-text {
+      display: table;
+      text-align: center;
+      height: 50px;
+      width: 100%;
+      text-transform: uppercase;
+      background-color: @color-accent;
+      color: @color-white;
+      position: absolute;
+      bottom: 0;
+      visibility: hidden;
+
+      p {
+        display: table-cell;
+        vertical-align: middle;
+        font-weight: bold;
+        font-size: 12px;
+      }
+    }
   }
 }
