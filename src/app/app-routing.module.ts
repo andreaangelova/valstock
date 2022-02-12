@@ -13,6 +13,12 @@ const routes: Routes = [
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
+    path: 'album',
+    canActivate: [AuthenticationGuard],
+    loadChildren: () =>
+      import('./features/album/album.module').then((m) => m.AlbumModule),
+  },
+  {
     path: 'login',
     loadChildren: () =>
       import('./features/login/login.module').then((m) => m.LoginModule),
