@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Item } from 'src/app/core/models/item';
 import { ItemsService } from 'src/app/core/services/items.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AlbumPopupComponent } from './album-popup/album-popup.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +15,11 @@ export class DashboardComponent implements OnInit {
   items: Item[] = [];
   subscription: Subscription;
 
-  constructor(private itemsService: ItemsService, private router: Router) {
+  constructor(
+    private itemsService: ItemsService,
+    private router: Router,
+    public dialog: MatDialog
+  ) {
     this.subscription = this.itemsService.items.subscribe((data) => {
       this.items = data;
       if (data.length === 0) this.itemsService.getItems();
@@ -30,8 +36,8 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  test() {
-    console.log('click');
+  openDialog() {
+    this.dialog.open(AlbumPopupComponent, { height: '350px', width: '450px', });
   }
 
   ngOnDestroy(): void {

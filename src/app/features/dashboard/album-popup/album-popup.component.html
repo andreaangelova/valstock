@@ -1,0 +1,31 @@
+<div id="popup-wrapper">
+  <div id="popup">
+    <div id="text-wrapper">
+      <button
+        [ngClass]="{ 'btn-inactive': !createNewAlbum }"
+        (click)="createNewAlbum = true"
+      >
+        create new album
+      </button>
+      <button
+        [ngClass]="{ 'btn-inactive': createNewAlbum }"
+        (click)="createNewAlbum = false"
+      >
+        add to existing
+      </button>
+    </div>
+    <div *ngIf="createNewAlbum" id="create-album">
+      <input placeholder="Enter title here" />
+    </div>
+    <div *ngIf="!createNewAlbum" id="select-album">
+      <ul>
+        <li *ngFor="let item of testAlbums">{{ item.name }}</li>
+      </ul>
+    </div>
+
+    <div id="btn-wrapper">
+      <button (click)="closeDialog()" class="btn-secondary">cancel</button>
+      <button class="btn-primary">save</button>
+    </div>
+  </div>
+</div>

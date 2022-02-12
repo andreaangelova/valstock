@@ -1,5 +1,16 @@
 @import url(/src/assets/styles/theming.less);
 
+#popup-wrapper {
+  width: 100%;
+  height: 100%;
+  display: table;
+  text-align: center;
+  #popup {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
 #text-wrapper {
   button {
     font-size: 12px;
@@ -33,10 +44,9 @@
   ul {
     list-style: none;
     width: 100%;
-    text-align: center;
     padding: 0;
     li {
-        padding: 7px;
+      padding: 7px;
     }
   }
 }

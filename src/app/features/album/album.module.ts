@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { AlbumRoutingModule } from './album-routing.module';
 import { AlbumComponent } from './album.component';
-import { AlbumPopupComponent } from './album-popup/album-popup.component';
 
 @NgModule({
-  declarations: [AlbumComponent, AlbumPopupComponent],
+  declarations: [AlbumComponent],
   imports: [CommonModule, AlbumRoutingModule],
 })
 export class AlbumModule {}

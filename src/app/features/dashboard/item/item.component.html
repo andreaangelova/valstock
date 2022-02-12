@@ -1,6 +1,6 @@
 <div *ngIf="selectedItem">
   <div id="btn-wrapper">
-    <button class="btn-secondary">add to album +</button>
+    <button (click)="openDialog()" class="btn-secondary">add to album +</button>
     <button class="btn-primary">download</button>
   </div>
 

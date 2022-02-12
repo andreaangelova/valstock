@@ -4,16 +4,10 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { ItemComponent } from './item/item.component';
-
+import { AlbumPopupComponent } from './album-popup/album-popup.component';
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    ItemComponent
-  ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule
-  ]
+  declarations: [DashboardComponent, ItemComponent, AlbumPopupComponent],
+  imports: [CommonModule, DashboardRoutingModule],
 })
-export class DashboardModule { }
+export class DashboardModule {}
