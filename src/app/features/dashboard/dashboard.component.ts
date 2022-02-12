@@ -22,9 +22,16 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  goToItem(item: Item): void {
-    this.itemsService.setSelectedItem(item);
-    this.router.navigate(['dashboard/item', item.id]);
+  goToItem(item: Item, event: Event): void {
+    let elementClicked = event.target as HTMLElement;
+    if (elementClicked.tagName.toLowerCase() === 'img') {
+      this.itemsService.setSelectedItem(item);
+      this.router.navigate(['dashboard/item', item.id]);
+    }
+  }
+
+  test() {
+    console.log('click');
   }
 
   ngOnDestroy(): void {
