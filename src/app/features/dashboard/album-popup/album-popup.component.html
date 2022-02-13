@@ -8,6 +8,7 @@
         create new album
       </button>
       <button
+        *ngIf="albums.length > 0"
         [ngClass]="{ 'btn-inactive': createNewAlbum }"
         (click)="createNewAlbum = false"
       >
@@ -15,17 +16,17 @@
       </button>
     </div>
     <div *ngIf="createNewAlbum" id="create-album">
-      <input placeholder="Enter title here" />
+      <input placeholder="Enter title here" [(ngModel)]="albumName" />
     </div>
     <div *ngIf="!createNewAlbum" id="select-album">
       <ul>
-        <li *ngFor="let item of testAlbums">{{ item.name }}</li>
+        <li *ngFor="let album of albums">{{ album.name }}</li>
       </ul>
     </div>
 
     <div id="btn-wrapper">
       <button (click)="closeDialog()" class="btn-secondary">cancel</button>
-      <button class="btn-primary">save</button>
+      <button (click)="create()" class="btn-primary">save</button>
     </div>
   </div>
 </div>

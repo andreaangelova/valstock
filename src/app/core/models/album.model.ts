@@ -1,4 +1,4 @@
-import { Item } from './item';
+import { Item } from './item.model';
 
 export interface Album {
   name: string;

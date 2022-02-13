@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Item } from 'src/app/core/models/item';
+import { Item } from 'src/app/core/models/item.model';
 import { ItemsService } from 'src/app/core/services/items.service';
 import { AlbumPopupComponent } from '../album-popup/album-popup.component';
 
