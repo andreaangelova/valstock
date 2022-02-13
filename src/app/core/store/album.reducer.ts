@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Album } from '../models/album.model';
+import { Album } from '../models';
 import { createAlbum } from './album.actions';
 
 export const albumFeatureKey = 'album';

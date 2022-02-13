@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Item } from 'src/app/core/models/item.model';
+import { Item } from 'src/app/core/models';
 import { ItemsService } from 'src/app/core/services/items.service';
 import { AlbumPopupComponent } from '../album-popup/album-popup.component';
 
@@ -30,7 +30,11 @@ export class ItemComponent implements OnInit {
   ngOnInit(): void {}
 
   openDialog() {
-    this.dialog.open(AlbumPopupComponent, { height: '350px', width: '450px' });
+    this.dialog.open(AlbumPopupComponent, {
+      height: '350px',
+      width: '450px',
+      data: { selectedItem: this.selectedItem },
+    });
   }
 
   ngOnDestroy(): void {

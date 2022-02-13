@@ -20,13 +20,20 @@
     </div>
     <div *ngIf="!createNewAlbum" id="select-album">
       <ul>
-        <li *ngFor="let album of albums">{{ album.name }}</li>
+        <li *ngFor="let album of albums">
+          <button
+            [ngClass]="{ selected: album.selected }"
+            (click)="album.selected = !album.selected"
+          >
+            {{ album.name }}
+          </button>
+        </li>
       </ul>
     </div>
 
     <div id="btn-wrapper">
       <button (click)="closeDialog()" class="btn-secondary">cancel</button>
-      <button (click)="create()" class="btn-primary">save</button>
+      <button (click)="save()" class="btn-primary">save</button>
     </div>
   </div>
 </div>

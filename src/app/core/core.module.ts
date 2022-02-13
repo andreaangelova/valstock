@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ActionReducerMap, StoreModule } from '@ngrx/store';
 import { albumReducer } from './store/album.reducer';
-import { AppStore } from './models/store.model';
+import { AppStore } from './models';
 
 export const store: ActionReducerMap<AppStore> = { albums: albumReducer };
 
