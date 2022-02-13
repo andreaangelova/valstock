@@ -1,7 +1,9 @@
 <div *ngIf="album">
   <div id="text-wrapper">
     <h1>{{ album.name }}</h1>
-    <p class="text-secondary">Date created: 29th November 2021</p>
+    <p class="text-secondary">
+      Date created: {{ album.dateCreated | date: "dd MMMM yyyy" }}
+    </p>
   </div>
 
   <div id="grid">
