@@ -12,7 +12,10 @@
       my albums
     </button>
     <div *ngIf="showDropdown" class="dropdown-content">
-      <button *ngFor="let album of albums" (click)="goToAlbum(album)">
+      <button
+        *ngFor="let album of albums; let i = index"
+        (click)="goToAlbum(i)"
+      >
         {{ album.name }}
       </button>
     </div>

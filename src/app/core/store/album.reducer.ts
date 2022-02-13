@@ -11,12 +11,12 @@ export const albumReducer = createReducer(
   on(createAlbum, (state, action) => {
     let name = action.payload.name;
     let dateCreated = new Date();
-    let selectedItem = action.payload.selectedItem;
+    let selectedItem = { ...action.payload.selectedItem };
     return [...state, { name, dateCreated, items: [selectedItem] }];
   }),
   on(addItemToAlbums, (state, action) => {
     let selectedAlbums = action.payload.selectedAlbums;
-    let selectedItem = action.payload.selectedItem;
+    let selectedItem = { ...action.payload.selectedItem };
     // TODO: implement clone deep
     let stateTemp = JSON.parse(JSON.stringify(state));
 

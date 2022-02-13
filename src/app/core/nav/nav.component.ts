@@ -39,8 +39,8 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  goToAlbum(album: Album) {
-    this.router.navigate(['/album']);
+  goToAlbum(index: number) {
+    this.router.navigate(['/album', index]);
   }
 
   ngOnDestroy(): void {
