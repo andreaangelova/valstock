@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Album, AppStore, Item } from 'src/app/core/models';
-import { createAlbum } from 'src/app/core/store/album.actions';
+import { addItemToAlbums, createAlbum } from 'src/app/core/store/album.actions';
 
 interface AlbumSelected extends Album {
   selected: boolean;
@@ -46,15 +46,27 @@ export class AlbumPopupComponent implements OnInit {
   }
 
   create() {
-    if (this.albumName) {
-      this.store.dispatch(createAlbum(this.albumName));
+    if (
+      this.albumName &&
+      !this.albums.find((album) => album.name === this.albumName)
+    ) {
+      this.store.dispatch(
+        createAlbum({ name: this.albumName, selectedItem: this.selectedItem })
+      );
       this.dialogRef.close('success');
     }
+    // TODO: add validation message
   }
 
   addToAlbum() {
-    console.log(this.selectedItem);
-    this.dialogRef.close('success');
+    let selectedAlbums = this.albums.filter((album) => album.selected);
+    if (selectedAlbums.length > 0) {
+      this.store.dispatch(
+        addItemToAlbums({ selectedItem: this.selectedItem, selectedAlbums })
+      );
+      this.dialogRef.close('success');
+    }
+    // TODO: add validation message
   }
 
   closeDialog() {
