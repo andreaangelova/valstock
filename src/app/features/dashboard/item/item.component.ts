@@ -14,6 +14,7 @@ import { AlbumPopupComponent } from '../album-popup/album-popup.component';
 export class ItemComponent implements OnInit {
   selectedItem: Item | null;
   subscription: Subscription;
+  showSuccessMessage: boolean = false;
 
   constructor(
     private itemService: ItemsService,
@@ -30,10 +31,16 @@ export class ItemComponent implements OnInit {
   ngOnInit(): void {}
 
   openDialog() {
-    this.dialog.open(AlbumPopupComponent, {
+    const dialogRef = this.dialog.open(AlbumPopupComponent, {
       height: '350px',
       width: '450px',
       data: { selectedItem: this.selectedItem },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'success') {
+        this.showSuccessMessage = true;
+        setTimeout(() => (this.showSuccessMessage = false), 2000);
+      }
     });
   }
 

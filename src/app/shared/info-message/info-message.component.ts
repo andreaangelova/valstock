@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-info-message',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./info-message.component.less'],
 })
 export class InfoMessageComponent implements OnInit {
-  message = 'This is a success message!';
+  @Input() message: string;
 
   constructor() {}
 

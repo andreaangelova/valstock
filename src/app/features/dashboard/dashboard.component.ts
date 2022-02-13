@@ -14,6 +14,7 @@ import { AlbumPopupComponent } from './album-popup/album-popup.component';
 export class DashboardComponent implements OnInit {
   items: Item[] = [];
   subscription: Subscription;
+  showSuccessMessage: boolean = false;
 
   constructor(
     private itemsService: ItemsService,
@@ -37,10 +38,17 @@ export class DashboardComponent implements OnInit {
   }
 
   openDialog(selectedItem: Item) {
-    this.dialog.open(AlbumPopupComponent, {
+    const dialogRef = this.dialog.open(AlbumPopupComponent, {
       height: '350px',
       width: '450px',
       data: { selectedItem },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'success') {
+        // TODO: create info message service
+        this.showSuccessMessage = true;
+        setTimeout(() => (this.showSuccessMessage = false), 2000);
+      }
     });
   }
 

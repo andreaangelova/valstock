@@ -48,13 +48,13 @@ export class AlbumPopupComponent implements OnInit {
   create() {
     if (this.albumName) {
       this.store.dispatch(createAlbum(this.albumName));
-      this.closeDialog();
+      this.dialogRef.close('success');
     }
   }
 
   addToAlbum() {
     console.log(this.selectedItem);
-    this.closeDialog();
+    this.dialogRef.close('success');
   }
 
   closeDialog() {
