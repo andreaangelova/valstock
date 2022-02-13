@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { Album, AppStore } from '../models';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -9,17 +12,38 @@ import { LoginService } from '../services/login.service';
 })
 export class NavComponent implements OnInit {
   loggedIn = false;
-  subscription: Subscription;
+  subscriptions: Subscription[] = [];
+  albums: Album[] = [];
+  showDropdown = false;
 
-  constructor(private loginService: LoginService) {
-    this.subscription = this.loginService.loggedIn.subscribe(
-      (data) => (this.loggedIn = data)
+  constructor(
+    private loginService: LoginService,
+    private store: Store<AppStore>,
+    private router: Router
+  ) {
+    this.subscriptions.push(
+      this.loginService.loggedIn.subscribe((data) => (this.loggedIn = data))
     );
+
+    this.subscriptions.push(
+      this.store
+        .select((store) => store.albums)
+        .subscribe((data) => (this.albums = data))
+    );
+  }
+
+  @HostListener('window:click', ['$event.target'])
+  onClick(target: HTMLElement) {
+    if (target.id !== 'album-dropdown') this.showDropdown = false;
   }
 
   ngOnInit(): void {}
 
+  goToAlbum(album: Album) {
+    this.router.navigate(['/album']);
+  }
+
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

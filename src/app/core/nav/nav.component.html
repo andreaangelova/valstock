@@ -2,7 +2,19 @@
   <div class="text-centered">
     <h2>valstock</h2>
   </div>
-  <div *ngIf="loggedIn" class="text-right">
-    <button class="btn-primary">my albums</button>
+  <div *ngIf="loggedIn && albums.length > 0" class="text-right">
+    <!-- TODO: add dropdown component -->
+    <button
+      id="album-dropdown"
+      (click)="showDropdown = !showDropdown"
+      class="btn-primary"
+    >
+      my albums
+    </button>
+    <div *ngIf="showDropdown" class="dropdown-content">
+      <button *ngFor="let album of albums" (click)="goToAlbum(album)">
+        {{ album.name }}
+      </button>
+    </div>
   </div>
 </div>
