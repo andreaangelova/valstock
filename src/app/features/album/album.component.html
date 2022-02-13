@@ -5,8 +5,8 @@
   </div>
 
   <div id="grid">
-    <div class="img-wrapper" *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9]">
-      <img src="https://picsum.photos/200" alt="item" />
+    <div class="img-wrapper" *ngFor="let item of album.items">
+      <img src="{{ item.url }}" alt="item" />
 
       <div class="img-text">
         <button>remove</button>
