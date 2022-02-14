@@ -2,20 +2,39 @@
 <p>Download free photos and videos powered by the best photographers.</p>
 
 <form [formGroup]="loginForm" (ngSubmit)="login()">
-  <label for="name">username</label>
-  <input
-    id="name"
-    formControlName="name"
-    type="text"
-    placeholder="Enter username here..."
-  />
-  <label for="password">password</label>
-  <input
-    id="password"
-    formControlName="password"
-    type="password"
-    placeholder="Enter username here..."
-  />
+  <div class="input-wrapper">
+    <label for="name">username</label>
+    <input
+      id="name"
+      formControlName="name"
+      type="text"
+      placeholder="Enter username here..."
+    />
+    <span
+      [ngClass]="{
+        'error-text':
+          loginForm.get('name')?.touched && loginForm.get('name')?.invalid
+      }"
+      >This field is required</span
+    >
+  </div>
+  <div class="input-wrapper">
+    <label for="password">password</label>
+    <input
+      id="password"
+      formControlName="password"
+      type="password"
+      placeholder="Enter username here..."
+    />
+    <span
+      [ngClass]="{
+        'error-text':
+          loginForm.get('password')?.touched &&
+          loginForm.get('password')?.invalid
+      }"
+      >This field is required</span
+    >
+  </div>
   <button class="btn-primary" type="submit">log in</button>
 </form>
 
