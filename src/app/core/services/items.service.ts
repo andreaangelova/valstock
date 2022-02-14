@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { Item } from '../models';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,10 @@ export class ItemsService {
   public items = new BehaviorSubject<Item[]>([]);
   public selectedItem = new BehaviorSubject<Item | null>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private spinnerService: SpinnerService
+  ) {}
 
   setSelectedItem(item: Item) {
     this.selectedItem.next(item);
@@ -27,6 +31,7 @@ export class ItemsService {
   }
 
   async getItems(numberOfItems: number = this.numberOfItems) {
+    this.spinnerService.showSpinner();
     let previousItems = this.items.getValue();
     let imgApiCalls = [];
     let itemsTemp: Item[] = [];
@@ -45,6 +50,7 @@ export class ItemsService {
         itemsTemp.push({ id, url });
       }
       this.items.next([...previousItems, ...itemsTemp]);
+      this.spinnerService.hideSpinner();
     });
   }
 
