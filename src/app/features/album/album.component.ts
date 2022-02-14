@@ -44,6 +44,7 @@ export class AlbumComponent implements OnInit {
   }
 
   removeItem(id: string) {
+    // TODO: remove multiple items on save
     this.store.dispatch(
       removeItemFromAlbum({ albumId: this.albumId, itemId: id })
     );

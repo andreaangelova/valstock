@@ -1,15 +1,18 @@
-<div id="grid">
-  <div
-    class="img-wrapper"
-    *ngFor="let item of items; let i = index"
-    (click)="goToItem(item, $event)"
-  >
-    <img src="{{ item.url }}" alt="item {{ item.id }}" />
+<div>
+  <div id="grid">
+    <div
+      class="img-wrapper"
+      *ngFor="let item of items; let i = index"
+      (click)="goToItem(item, $event)"
+    >
+      <img src="{{ item.url }}" alt="item {{ item.id }}" />
 
-    <div class="img-text">
-      <button (click)="openDialog(item)">Add to album</button>
+      <div class="img-text">
+        <button (click)="openDialog(item)">Add to album</button>
+      </div>
     </div>
   </div>
+  <button class="btn-primary" (click)="loadMore()">load more</button>
 </div>
 
 <app-info-message

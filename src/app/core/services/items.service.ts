@@ -26,10 +26,11 @@ export class ItemsService {
     }
   }
 
-  async getItems() {
+  async getItems(numberOfItems: number = this.numberOfItems) {
+    let previousItems = this.items.getValue();
     let imgApiCalls = [];
     let itemsTemp: Item[] = [];
-    for (let i = 1; i <= this.numberOfItems; i++) {
+    for (let i = 1; i <= numberOfItems; i++) {
       let url = this.baseUrl + '/200' + this.getUrlSuffix(i);
       imgApiCalls.push(
         this.http.get(url, { observe: 'response', responseType: 'blob' })
@@ -43,7 +44,7 @@ export class ItemsService {
         let id = data.headers.get('picsum-id') as string;
         itemsTemp.push({ id, url });
       }
-      this.items.next(itemsTemp);
+      this.items.next([...previousItems, ...itemsTemp]);
     });
   }
 

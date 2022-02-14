@@ -29,6 +29,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  loadMore() {
+    this.itemsService.getItems(30);
+  }
+
   goToItem(item: Item, event: Event): void {
     let elementClicked = event.target as HTMLElement;
     if (elementClicked.tagName.toLowerCase() === 'img') {
