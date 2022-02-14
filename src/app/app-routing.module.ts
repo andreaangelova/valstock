@@ -23,6 +23,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/login/login.module').then((m) => m.LoginModule),
   },
+  // TODO: add page not found
 ];
 
 @NgModule({

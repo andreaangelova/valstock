@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Album, AppStore } from 'src/app/core/models';
@@ -11,23 +11,34 @@ import { Album, AppStore } from 'src/app/core/models';
 })
 export class AlbumComponent implements OnInit {
   album: Album;
-  subscription: Subscription;
+  albums: Album[] = [];
+  subscriptions: Subscription[] = [];
 
-  constructor(private store: Store<AppStore>, private router: Router) {
-    let id = parseInt(this.router.url.split('/')[2]);
-    
-    this.subscription = this.store
-      .select((store) => store.albums)
-      .subscribe((data) => {
-        this.album = data[id];
-        // TODO: add guard
-        if (!this.album) this.router.navigate(['/dashboard']);
-      });
+  constructor(
+    private store: Store<AppStore>,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.subscriptions.push(
+      this.store.select('albums').subscribe((data) => (this.albums = data))
+    );
+    this.subscriptions.push(
+      this.route.params.subscribe((param) => {
+        let id = Number(param['id']);
+        this.getAlbum(id);
+      })
+    );
   }
 
   ngOnInit(): void {}
 
+  getAlbum(id: number) {
+    this.album = this.albums[id];
+    // TODO: add guard
+    if (!this.album) this.router.navigate(['/dashboard']);
+  }
+
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }
