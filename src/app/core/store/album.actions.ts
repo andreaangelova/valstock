@@ -9,6 +9,6 @@ export const addItemToAlbums = createAction(
     payload,
   })
 );
-export const removeAlbum = createAction('Remove Album', (payload) => ({
+export const removeItemFromAlbum = createAction('Remove Item From Album', (payload) => ({
   payload,
 }));

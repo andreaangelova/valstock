@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Album, AppStore } from 'src/app/core/models';
+import { removeItemFromAlbum } from 'src/app/core/store/album.actions';
 
 @Component({
   selector: 'app-album',
@@ -11,6 +12,7 @@ import { Album, AppStore } from 'src/app/core/models';
 })
 export class AlbumComponent implements OnInit {
   album: Album;
+  albumId: number;
   albums: Album[] = [];
   subscriptions: Subscription[] = [];
 
@@ -20,22 +22,31 @@ export class AlbumComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.subscriptions.push(
-      this.store.select('albums').subscribe((data) => (this.albums = data))
+      this.store.select('albums').subscribe((data) => {
+        this.albums = data;
+        if (this.albumId !== undefined) this.getAlbum();
+      })
     );
     this.subscriptions.push(
       this.route.params.subscribe((param) => {
-        let id = Number(param['id']);
-        this.getAlbum(id);
+        this.albumId = Number(param['id']);
+        this.getAlbum();
       })
     );
   }
 
   ngOnInit(): void {}
 
-  getAlbum(id: number) {
-    this.album = this.albums[id];
+  getAlbum() {
+    this.album = this.albums[this.albumId];
     // TODO: add guard
     if (!this.album) this.router.navigate(['/dashboard']);
+  }
+
+  removeItem(id: string) {
+    this.store.dispatch(
+      removeItemFromAlbum({ albumId: this.albumId, itemId: id })
+    );
   }
 
   ngOnDestroy(): void {

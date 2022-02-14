@@ -26,9 +26,7 @@ export class NavComponent implements OnInit {
     );
 
     this.subscriptions.push(
-      this.store
-        .select((store) => store.albums)
-        .subscribe((data) => (this.albums = data))
+      this.store.select('albums').subscribe((data) => (this.albums = data))
     );
   }
 

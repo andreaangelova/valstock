@@ -20,8 +20,8 @@ export class ItemsService {
       this.http
         .get(`${this.baseUrl}/id/${item.id}/info`)
         .subscribe((data: any) => {
-          item.author = data.author;
-          this.selectedItem.next(item);
+          let newItem = { ...item, author: data.author };
+          this.selectedItem.next(newItem);
         });
     }
   }
