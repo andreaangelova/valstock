@@ -1,7 +1,12 @@
 <div *ngIf="selectedItem">
   <div id="btn-wrapper">
     <button (click)="openDialog()" class="btn-secondary">add to album +</button>
-    <button class="btn-primary">download</button>
+    <a
+      class="btn btn-primary"
+      href="{{ selectedItem.url }}"
+      download="image.jpeg"
+      >download</a
+    >
   </div>
 
   <div id="img-wrapper">
@@ -18,4 +23,7 @@
   </div>
 </div>
 
-<app-info-message *ngIf="showSuccessMessage" message="This is a success message!"></app-info-message>
+<app-info-message
+  *ngIf="showSuccessMessage"
+  message="This is a success message!"
+></app-info-message>
