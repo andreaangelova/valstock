@@ -20,7 +20,7 @@ export class AlbumPopupComponent implements OnInit {
   createNewAlbum = true;
   albums: AlbumSelected[] = [];
   selectedItem: Item;
-  albumName: string = '';
+  albumName = '';
   subscription: Subscription;
 
   constructor(

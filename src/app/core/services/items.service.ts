@@ -8,8 +8,8 @@ import { SpinnerService } from './spinner.service';
   providedIn: 'root',
 })
 export class ItemsService {
-  baseUrl: string = 'https://picsum.photos';
-  numberOfItems: number = 12;
+  baseUrl = 'https://picsum.photos';
+  numberOfItems = 12;
   public items = new BehaviorSubject<Item[]>([]);
   public selectedItem = new BehaviorSubject<Item | null>(null);
 

@@ -14,7 +14,7 @@ import { AlbumPopupComponent } from './album-popup/album-popup.component';
 export class DashboardComponent implements OnInit {
   items: Item[] = [];
   subscription: Subscription;
-  showSuccessMessage: boolean = false;
+  showSuccessMessage = false;
 
   constructor(
     private itemsService: ItemsService,

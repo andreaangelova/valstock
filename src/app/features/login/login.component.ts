@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
       this.loginService.logIn(this.loginForm.value);
       this.loginForm.reset();
       this.route.navigate(['dashboard']);
+    } else {
+      this.loginForm.markAllAsTouched();
     }
   }
 }

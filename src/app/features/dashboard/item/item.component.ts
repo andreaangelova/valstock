@@ -14,7 +14,7 @@ import { AlbumPopupComponent } from '../album-popup/album-popup.component';
 export class ItemComponent implements OnInit {
   selectedItem: Item | null;
   subscription: Subscription;
-  showSuccessMessage: boolean = false;
+  showSuccessMessage = false;
 
   constructor(
     private itemService: ItemsService,
